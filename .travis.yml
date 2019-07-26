@@ -10,20 +10,20 @@ cache:
 before_install:
   - npm i -g npm@10.14
 
-  jobs:
+jobs:
   include:
-    - state: "Test"
-      name: "Unit Test Node v10"
+    - state: 'Test'
+      name: 'Unit Test Node v10'
       script: npm test
       node_js: 10
       after_success: npm run coverage
 
-    - stage: "Test"
-      name: "Lint"
+    - stage: 'Test'
+      name: 'Lint'
       script: npm run lint
       node_js: 10
 
-    - stage: "Test"
-      name: "Build dev"
+    - stage: 'Test'
+      name: 'Build dev'
       script: npm run build:dev
       node_js: 10
