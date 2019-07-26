@@ -1,0 +1,29 @@
+language: node_js
+
+install:
+  - npm install
+
+cache:
+  directories:
+    - 'node_modules'
+
+before_install:
+  - npm i -g npm@10.14
+
+  jobs:
+  include:
+    - state: "Test"
+      name: "Unit Test Node v10"
+      script: npm test
+      node_js: 10
+      after_success: npm run coverage
+
+    - stage: "Test"
+      name: "Lint"
+      script: npm run lint
+      node_js: 10
+
+    - stage: "Test"
+      name: "Build dev"
+      script: npm run build:dev
+      node_js: 10
