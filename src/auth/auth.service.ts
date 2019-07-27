@@ -13,6 +13,7 @@ export class AuthService {
     const user = await this.usersService.findOne(username);
 
     if (user && user.password === password) {
+      // tslint:disable-next-line:no-shadowed-variable
       const { password, ...result } = user;
       return result;
     } else {
@@ -20,7 +21,7 @@ export class AuthService {
     }
   }
 
-  async login(user: any) {
+  async signin(user: any) {
     const payload = { username: user.username, sub: user.userId };
     return {
       access_token: this.jwtService.sign(payload),
