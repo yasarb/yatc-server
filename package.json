@@ -18,6 +18,12 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test",
+      "post-commit": "git update-index -g"
+    }
+  },
   "dependencies": {
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
@@ -40,6 +46,7 @@
     "@types/jest": "24.0.11",
     "@types/node": "11.13.4",
     "@types/supertest": "2.0.7",
+    "husky": "^3.0.1",
     "jest": "24.7.1",
     "prettier": "1.17.0",
     "supertest": "4.0.2",
