@@ -5,6 +5,7 @@
   "author": "@ysrbdlgn",
   "license": "MIT",
   "scripts": {
+    "clean": "rimraf dist",
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
@@ -30,12 +31,15 @@
     "@nestjs/jwt": "^6.1.1",
     "@nestjs/passport": "^6.1.0",
     "@nestjs/platform-express": "^6.0.0",
+    "@types/redis": "^2.8.13",
+    "async-redis": "^1.1.7",
     "express-rate-limit": "^5.0.0",
     "helmet": "^3.20.0",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "redis": "^2.8.0",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3"
