@@ -1,4 +1,5 @@
-version: '3'
+version: '3.1'
+
 services:
   redis:
     image: redis
@@ -22,3 +23,30 @@ services:
       - redis
     depends_on:
       - redis
+      - database
+
+  database:
+    image: postgres
+    restart: always
+    container_name: yasa-db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=rootpwd
+      - POSTGRES_DB=yasadb
+
+  dbadminer:
+    image: adminer
+    container_name: yasa-db-adminer
+    restart: always
+    ports:
+      - 8081:8080
+    links:
+      - database
+    depends_on:
+      - database
+    environment:
+      - ADMINER_DEFAULT_SERVER=localhost
+      - ADMINER_DESIGN=price
+      - ADMINER_DRIVER=pgsql

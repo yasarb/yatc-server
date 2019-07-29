@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Req, Body } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { RedisService } from './redis/redis.service';
+import { User } from './users/user.entity';
 
 @Controller()
 export class AppController {
@@ -12,5 +13,17 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Post('/user')
+  newUser(): any {
+    const user = new User();
+    user.username = 'yasar1';
+    user.password = 'pwd';
+    user.email = 'asd@bcd.com';
+    user.photoId = 2;
+    user.lang = 'tr';
+
+    user.save();
   }
 }
