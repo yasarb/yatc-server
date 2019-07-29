@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { RedisService } from '../redis/redis.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
+    private readonly redis: RedisService,
   ) {}
 
   async validateUser(username: string, password: string): Promise<any> {
@@ -26,5 +28,16 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+  async signout(token: string) {
+    const payload = this.jwtService.decode(token);
+    const payloadStr = JSON.stringify(payload);
+
+    const expField = 'exp';
+
+    await this.redis
+      .getClient()
+      .zadd('jwt:revoked:tokens', payload[expField], payloadStr);
   }
 }
