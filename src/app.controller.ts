@@ -15,6 +15,11 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get('/ping')
+  ping(): string {
+    return 'pong';
+  }
+
   @Post('/user')
   newUser(): any {
     const user = new User();
