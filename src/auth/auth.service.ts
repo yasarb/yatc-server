@@ -1,4 +1,8 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { UsersService } from '../users/users.service';
@@ -15,28 +19,33 @@ export class AuthService {
     private readonly redis: RedisService,
   ) {}
 
-  async validateUser(
-    username: string,
-    password: string,
-  ): Promise<User | undefined> {
+  async validateUser(username: string, password: string): Promise<User> {
     return this.usersService
       .findOne(username)
       .then(user => {
-        return bcrypt.compare(password, user.password).then(same => {
-          return same ? user : undefined;
-        });
+        if (user) {
+          return bcrypt.compare(password, user.password).then(same => {
+            if (same) {
+              return user;
+            } else {
+              throw new UnauthorizedException(
+                'Incorrect username or password.',
+              );
+            }
+          });
+        } else {
+          throw new UnauthorizedException('Incorrect username or password.');
+        }
       })
       .catch(error => {
-        /* tslint:disable-next-line */
-        console.error(error);
-        return undefined;
+        throw error;
       });
   }
 
   signin(user: any): object {
     const payload = { username: user.username, sub: user.userId };
     return {
-      access_token: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload),
     };
   }
 
