@@ -1,6 +1,6 @@
 {
   "name": "yasa-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Server implementation of Yet Another Story App",
   "author": "@ysrbdlgn",
   "license": "MIT",
@@ -10,20 +10,30 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
-    "start:debug": "tsc-watch -p tsconfig.build.json --onSuccess \"node --inspect-brk dist/main.js\"",
+    "start:debug": "tsc-watch -p tsconfig.build.json --onSuccess \"node --inspect=0.0.0.0 dist/main.js\"",
     "start:prod": "node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "doc:clean": "rimraf apidoc/",
+    "doc:build": "apidoc . -e node_modules/ -o apidoc/"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint && npm run test",
       "post-commit": "git update-index -g"
     }
+  },
+  "apidoc": {
+    "name": "yasa-server",
+    "version": "1.0.0",
+    "title": "YASA - Yet Another Story App",
+    "description": "Server implementation of Yet Another Story App",
+    "url": "http://localhost:8080",
+    "repository": "https://github.com/ysrbdlgn/yasa-server"
   },
   "dependencies": {
     "@nestjs/common": "^6.0.0",
@@ -54,6 +64,7 @@
     "@types/jest": "24.0.11",
     "@types/node": "^11.13.4",
     "@types/supertest": "2.0.7",
+    "apidoc": "^0.17.7",
     "husky": "^3.0.1",
     "jest": "24.7.1",
     "prettier": "1.17.0",
