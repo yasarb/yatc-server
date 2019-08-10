@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ViewUserDto } from './dto/view-user.dto';
 import { User } from './user.entity';
 
@@ -21,7 +21,7 @@ export class UsersService {
       if (user) {
         return ViewUserDto.fromEntity(user);
       } else {
-        return undefined;
+        throw new NotFoundException(`User not found with given id: ${userId}`);
       }
     });
   }

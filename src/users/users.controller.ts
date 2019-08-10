@@ -15,6 +15,8 @@ export class UsersController {
       .then(userDto => {
         return userDto;
       })
-      .catch();
+      .catch(error => {
+        throw error;
+      });
   }
 }
