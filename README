@@ -1,0 +1,9 @@
+* Delete `apidoc` folder:
+  ```
+    npm run doc:clean
+  ```
+
+* Generate api doc
+  ```
+    npm run doc:build
+  ```
