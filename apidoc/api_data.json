@@ -238,5 +238,67 @@
     },
     "filename": "./src/auth/auth.controller.ts",
     "groupTitle": "Auth"
+  },
+  {
+    "type": "post",
+    "url": "/users/:id",
+    "title": "User Profile",
+    "version": "1.0.0",
+    "name": "Profile",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User's unique identifier number.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>User model</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response: 200",
+          "content": "HTTP/1.1 200 OK\n{\n    \"userId\": 1,\n    \"username\": \"testuser\",\n    \"password\": \"$2a$04$EMrm/P79Fv.c4HotqPDZpOzDzr9Y9aUAU0gji7kiRSywv7wFWV6A2\",\n    \"email\": \"abc@def.com\",\n    \"lang\": \"tr\",\n    \"photoId\": -1,\n    \"registeredAt\": \"2019-08-10T15:17:55.163Z\",\n    \"isActive\": true,\n    \"followingCount\": 123,\n    \"followerCount\": 45,\n    \"likeCount\": 652,\n    \"videoList\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "404": [
+          {
+            "group": "404",
+            "optional": false,
+            "field": "NotFound",
+            "description": "<p>No user found with given user id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response: 404",
+          "content": "HTTP/1.1 404 Not Found\n{\n    \"statusCode\": 404,\n    \"error\": \"Not Found\",\n    \"message\": \"`User not found with given id: 1\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./src/users/users.controller.ts",
+    "groupTitle": "User"
   }
 ]
