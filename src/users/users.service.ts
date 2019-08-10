@@ -1,11 +1,28 @@
 import { Injectable } from '@nestjs/common';
+import { ViewUserDto } from './dto/view-user.dto';
 import { User } from './user.entity';
 
 export type User = any;
 
 @Injectable()
 export class UsersService {
-  async findOne(username: string): Promise<User | undefined> {
-    return User.findOne({ username });
+  async findUserByUsername(username: string): Promise<ViewUserDto | undefined> {
+    return User.findOne({ username }).then(user => {
+      if (user) {
+        return ViewUserDto.fromEntity(user);
+      } else {
+        return undefined;
+      }
+    });
+  }
+
+  async findUserById(userId: number): Promise<ViewUserDto> {
+    return User.findOne({ userId }).then(user => {
+      if (user) {
+        return ViewUserDto.fromEntity(user);
+      } else {
+        return undefined;
+      }
+    });
   }
 }

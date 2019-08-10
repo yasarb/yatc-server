@@ -4,12 +4,12 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcryptjs';
 import { UsersService } from '../users/users.service';
 import { RedisService } from '../redis/redis.service';
-import { User } from '../users/user.entity';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { QueryFailedError } from 'typeorm/error/QueryFailedError';
+import { ViewUserDto } from '../users/dto/view-user.dto';
+import { User } from '../users/user.entity';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -19,9 +19,9 @@ export class AuthService {
     private readonly redis: RedisService,
   ) {}
 
-  async validateUser(username: string, password: string): Promise<User> {
+  async validateUser(username: string, password: string): Promise<ViewUserDto> {
     return this.usersService
-      .findOne(username)
+      .findUserByUsername(username)
       .then(user => {
         if (user) {
           return bcrypt.compare(password, user.password).then(same => {

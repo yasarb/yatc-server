@@ -64,4 +64,12 @@ export class User extends BaseEntity {
     comment: 'Whether User account is active',
   })
   isActive: boolean;
+
+  @Column({
+    name: 'is_admin',
+    nullable: false,
+    default: false,
+    comment: 'Whether User has admin privileges',
+  })
+  isAdmin: boolean;
 }
