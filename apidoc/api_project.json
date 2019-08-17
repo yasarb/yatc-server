@@ -1,8 +1,8 @@
 {
-  "name": "yasa-server",
+  "name": "yatc-server",
   "version": "1.0.0",
-  "title": "YASA - Yet Another Story App",
-  "description": "Server implementation of Yet Another Story App",
+  "title": "YATC - Yet Another Twitter Clone",
+  "description": "Server implementation of Yet Another Twitter Clone",
   "url": "http://localhost:8080",
   "repository": "https://github.com/ysrbdlgn/yasa-server",
   "sampleUrl": false,
@@ -10,7 +10,7 @@
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2019-08-10T16:59:26.553Z",
+    "time": "2019-08-17T09:51:41.536Z",
     "url": "http://apidocjs.com",
     "version": "0.17.7"
   }
