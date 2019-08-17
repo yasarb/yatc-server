@@ -7,7 +7,7 @@ export class RedisService implements OnModuleInit {
   private client: RedisClient = null;
 
   private readonly options: ClientOpts = {
-    host: 'yasa-redis',
+    host: 'yatc-redis',
     port: 6379,
   };
 

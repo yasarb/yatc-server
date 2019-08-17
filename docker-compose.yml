@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   app:
-    container_name: yasa-server
+    container_name: yatc-server
     build: ./
     volumes:
       - ./:/usr/src/app
@@ -20,24 +20,24 @@ services:
 
   redis:
     image: redis
-    container_name: yasa-redis
+    container_name: yatc-redis
     ports:
       - 6379:6379
 
   database:
     image: postgres
     restart: always
-    container_name: yasa-db
+    container_name: yatc-db
     ports:
       - 5432:5432
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=rootpwd
-      - POSTGRES_DB=yasadb
+      - POSTGRES_DB=yatcdb
 
   dbadminer:
     image: adminer
-    container_name: yasa-db-adminer
+    container_name: yatc-db-adminer
     restart: always
     ports:
       - 8081:8080

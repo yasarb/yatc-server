@@ -1,7 +1,7 @@
 {
-  "name": "yasa-server",
+  "name": "yatc-server",
   "version": "1.0.0",
-  "description": "Server implementation of Yet Another Story App",
+  "description": "Server implementation of Yet Another Twitter Clone",
   "author": "@ysrbdlgn",
   "license": "MIT",
   "scripts": {
@@ -28,10 +28,10 @@
     }
   },
   "apidoc": {
-    "name": "yasa-server",
+    "name": "yatc-server",
     "version": "1.0.0",
-    "title": "YASA - Yet Another Story App",
-    "description": "Server implementation of Yet Another Story App",
+    "title": "YATC - Yet Another Twitter Clone",
+    "description": "Server implementation of Yet Another Twitter Clone",
     "url": "http://localhost:8080",
     "repository": "https://github.com/ysrbdlgn/yasa-server"
   },
