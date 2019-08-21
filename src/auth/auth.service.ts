@@ -61,10 +61,8 @@ export class AuthService {
         user.username = createUserDto.username;
         user.email = createUserDto.email;
         user.password = hash;
-        user.photoId = -1;
         user.lang = createUserDto.lang;
         user.registeredAt = new Date();
-        user.isActive = true;
 
         return user.save();
       })

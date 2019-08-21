@@ -6,7 +6,7 @@ export class ViewUserDto {
   readonly password: string; // todo extract this
   readonly email: string;
   readonly lang: string;
-  readonly photoId: number; // todo change to 'photoUrl'
+  readonly photoUrl: string; // todo change to 'photoUrl'
   readonly registeredAt: Date;
   readonly isActive: boolean;
   readonly followingCount: number;
@@ -21,7 +21,7 @@ export class ViewUserDto {
       password: entity.password,
       email: entity.email,
       lang: entity.lang,
-      photoId: entity.photoId,
+      photoUrl: entity.profilePhotoUrl,
       registeredAt: entity.registeredAt,
       isActive: entity.isActive,
       followingCount: 123,
