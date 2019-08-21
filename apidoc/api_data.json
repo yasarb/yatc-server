@@ -33,6 +33,20 @@
             "group": "200",
             "type": "String",
             "optional": false,
+            "field": "userId",
+            "description": "<p>Unique identifier for logged User</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Unique name of logged User</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
             "field": "accessToken",
             "description": "<p>Token to be used to make authenticated requests</p>"
           }
@@ -41,7 +55,7 @@
       "examples": [
         {
           "title": "Success-Response: 200",
-          "content": "HTTP/1.1 200 OK\n{\n  \"accessToken\": \"eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k\",\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"userId\": 1,\n  \"username\": \"admin\",\n  \"accessToken\": \"eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k\",\n}",
           "type": "json"
         }
       ]
@@ -110,13 +124,12 @@
     },
     "success": {
       "fields": {
-        "201": [
+        "204": [
           {
-            "group": "201",
-            "type": "String",
+            "group": "204",
             "optional": false,
-            "field": "ABC",
-            "description": "<p>ABCDEF</p>"
+            "field": "NoContent",
+            "description": "<p>Successfully logged out.</p>"
           }
         ]
       }
@@ -274,7 +287,7 @@
       "examples": [
         {
           "title": "Success-Response: 200",
-          "content": "HTTP/1.1 200 OK\n{\n    \"userId\": 1,\n    \"username\": \"testuser\",\n    \"password\": \"$2a$04$EMrm/P79Fv.c4HotqPDZpOzDzr9Y9aUAU0gji7kiRSywv7wFWV6A2\",\n    \"email\": \"abc@def.com\",\n    \"lang\": \"tr\",\n    \"photoId\": -1,\n    \"registeredAt\": \"2019-08-10T15:17:55.163Z\",\n    \"isActive\": true,\n    \"followingCount\": 123,\n    \"followerCount\": 45,\n    \"likeCount\": 652,\n    \"videoList\": []\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    \"userId\": 1,\n    \"username\": \"testuser\",\n    \"email\": \"abc@def.com\",\n    \"lang\": \"tr\",\n    \"profilePhotoUrl\": \"\",\n    \"profileBannerUrl\": \"\",\n    \"registeredAt\": \"2019-08-10T15:17:55.163Z\",\n    \"isAdmin\": false,\n    \"isActive\": true,\n    \"isPrivate\": false,\n    \"isVerified\": false,\n}",
           "type": "json"
         }
       ]
