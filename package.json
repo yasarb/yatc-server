@@ -58,6 +58,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
+    "shortid": "^2.2.14",
     "typeorm": "^0.2.18"
   },
   "devDependencies": {
