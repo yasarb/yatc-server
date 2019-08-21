@@ -7,7 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { RedisService } from '../redis/redis.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { ViewUserDto } from '../users/dto/view-user.dto';
+import { UserDto } from '../users/dto/user.dto';
 import { User } from '../users/user.entity';
 import * as bcrypt from 'bcryptjs';
 
@@ -19,7 +19,7 @@ export class AuthService {
     private readonly redis: RedisService,
   ) {}
 
-  async validateUser(username: string, password: string): Promise<ViewUserDto> {
+  async validateUser(username: string, password: string): Promise<UserDto> {
     return this.usersService
       .findUserByUsername(username)
       .then(user => {

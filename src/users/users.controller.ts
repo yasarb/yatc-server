@@ -1,7 +1,7 @@
 import { Controller, UseGuards, Get, Param, Req } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UsersService } from './users.service';
-import { ViewUserDto } from './dto/view-user.dto';
+import { UserProfileDto } from './dto/profile.dto';
 
 @Controller('users')
 export class UsersController {
@@ -22,19 +22,15 @@ export class UsersController {
    *     {
    *         "userId": 1,
    *         "username": "testuser",
-   *         "password": "$2a$04$EMrm/P79Fv.c4HotqPDZpOzDzr9Y9aUAU0gji7kiRSywv7wFWV6A2",
    *         "email": "abc@def.com",
    *         "lang": "tr",
-   *         "photoUrl": "",
+   *         "profilePhotoUrl": "",
+   *         "profileBannerUrl": "",
    *         "registeredAt": "2019-08-10T15:17:55.163Z",
+   *         "isAdmin": false,
    *         "isActive": true,
    *         "isPrivate": false,
-   *         "isAdmin": false,
    *         "isVerified": false,
-   *         "followingCount": 123,
-   *         "followerCount": 45,
-   *         "likeCount": 652,
-   *         "videoList": []
    *     }
    *
    * @apiError (404) NotFound No user found with given user id
@@ -50,11 +46,15 @@ export class UsersController {
    */
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
-  async findOneById(@Req() req, @Param('id') id: number): Promise<ViewUserDto> {
+  async findOneById(
+    @Req() req,
+    @Param('id') id: number,
+  ): Promise<UserProfileDto> {
     return this.usersService
       .findUserById(id)
       .then(userDto => {
-        return userDto;
+        const { password, ...profileDto } = userDto;
+        return profileDto;
       })
       .catch(error => {
         throw error;
