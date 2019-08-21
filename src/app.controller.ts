@@ -19,16 +19,4 @@ export class AppController {
   ping(): string {
     return 'pong';
   }
-
-  @Post('/user')
-  newUser(): any {
-    const user = new User();
-    user.username = 'yasar1';
-    user.password = 'pwd';
-    user.email = 'asd@bcd.com';
-    user.photoId = 2;
-    user.lang = 'tr';
-
-    user.save();
-  }
 }
