@@ -1,7 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { RedisService } from './redis/redis.service';
-import { User } from './users/user.entity';
 
 @Controller()
 export class AppController {
