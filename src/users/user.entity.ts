@@ -38,6 +38,7 @@ export class User extends BaseEntity {
   @Column({
     name: 'profile_photo_url',
     length: 128,
+    default: '',
     comment: 'URL pointing to the User’s profile image',
   })
   profilePhotoUrl: string;
@@ -45,9 +46,10 @@ export class User extends BaseEntity {
   @Column({
     name: 'profile_banner_url',
     length: 128,
+    default: '',
     comment: 'URL pointing to the User’s profile banner image',
   })
-  profileBannerUrl: number;
+  profileBannerUrl: string;
 
   @Column({
     name: 'lang',
@@ -66,7 +68,6 @@ export class User extends BaseEntity {
 
   @Column({
     name: 'is_active',
-    nullable: false,
     default: true,
     comment: 'Whether User account is active',
   })
@@ -74,7 +75,6 @@ export class User extends BaseEntity {
 
   @Column({
     name: 'is_admin',
-    nullable: false,
     default: false,
     comment: 'Whether User has admin privileges',
   })
@@ -82,7 +82,6 @@ export class User extends BaseEntity {
 
   @Column({
     name: 'is_private',
-    nullable: false,
     default: false,
     comment:
       'Whether User profile is private (non-followers will not see his/her posts)',
@@ -91,7 +90,6 @@ export class User extends BaseEntity {
 
   @Column({
     name: 'is_verified',
-    nullable: false,
     default: false,
     comment: 'Whether User account is verified',
   })
