@@ -7,6 +7,7 @@ import { RedisModule } from './redis/redis.module';
 import { ConfigModule } from './config/config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.service';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { PostgresConfigService } from './config/postgres.service';
       imports: [ConfigModule],
       useExisting: PostgresConfigService,
     }),
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

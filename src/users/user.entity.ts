@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  OneToMany,
+} from 'typeorm';
+import { Post } from '../posts/post.entity';
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {
@@ -94,4 +101,7 @@ export class User extends BaseEntity {
     comment: 'Whether User account is verified',
   })
   isVerified: boolean;
+
+  @OneToMany(() => Post, (post: Post) => post.author)
+  public posts: Post[];
 }
