@@ -2,6 +2,7 @@ import { Controller, UseGuards, Get, Param, Req } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UsersService } from './users.service';
 import { UserProfileDto } from './dto/profile.dto';
+import { UserDto } from './dto/user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -46,13 +47,11 @@ export class UsersController {
    */
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
-  async findOneById(
-    @Req() req,
-    @Param('id') id: number,
-  ): Promise<UserProfileDto> {
+  async findOneById(@Param('id') id: number): Promise<UserProfileDto> {
     return this.usersService
       .findUserById(id)
-      .then(userDto => {
+      .then(user => {
+        const userDto = UserDto.fromEntity(user);
         const { password, ...profileDto } = userDto;
         return profileDto;
       })

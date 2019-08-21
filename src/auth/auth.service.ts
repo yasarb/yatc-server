@@ -23,10 +23,12 @@ export class AuthService {
     return this.usersService
       .findUserByUsername(username)
       .then(user => {
-        if (user) {
-          return bcrypt.compare(password, user.password).then(same => {
+        const userDto = UserDto.fromEntity(user);
+
+        if (userDto) {
+          return bcrypt.compare(password, userDto.password).then(same => {
             if (same) {
-              return user;
+              return userDto;
             } else {
               throw new UnauthorizedException(
                 'Incorrect username or password.',
