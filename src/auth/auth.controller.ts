@@ -24,6 +24,8 @@ export class AuthController {
    * @apiParam {String} username User's unique username.
    * @apiParam {String} password User's password.
    *
+   * @apiSuccess (200) {String} userId Unique identifier for logged User
+   * @apiSuccess (200) {String} username Unique name of logged User
    * @apiSuccess (200) {String} accessToken Token to be used to make authenticated requests
    *
    * @apiSuccessExample {json} Success-Response: 200
@@ -115,7 +117,7 @@ export class AuthController {
    *       "Authorization": "Bearer eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k"
    *     }
    *
-   * @apiSuccess (204)
+   * @apiSuccess (204) NoContent Successfully logged out.
    *
    * @ApiError (401) Unauthorized Given token is invalid.
    *
