@@ -29,6 +29,8 @@ export class AuthController {
    * @apiSuccessExample {json} Success-Response: 200
    *     HTTP/1.1 200 OK
    *     {
+   *       "userId": 1,
+   *       "username": "admin",
    *       "accessToken": "eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k",
    *     }
    *
