@@ -5,6 +5,7 @@ import {
   Request,
   Headers,
   Body,
+  HttpCode,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
@@ -112,7 +113,7 @@ export class AuthController {
    *       "Authorization": "Bearer eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k"
    *     }
    *
-   * @apiSuccess (201) {String} ABC ABCDEF
+   * @apiSuccess (204)
    *
    * @ApiError (401) Unauthorized Given token is invalid.
    *
@@ -125,6 +126,7 @@ export class AuthController {
    */
   @UseGuards(AuthGuard('jwt'))
   @Post('/signout')
+  @HttpCode(204)
   async signout(@Headers('authorization') auth) {
     const token = auth.split(' ')[1];
     return this.authService.signout(token);
