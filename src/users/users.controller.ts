@@ -14,6 +14,13 @@ export class UsersController {
    * @apiName Profile
    * @apiGroup User
    *
+   * @apiHeader {String} Authorization User's token
+   *
+   * @apiHeaderExample {json} Header-Example:
+   *     {
+   *         "Authorization": "Bearer eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k"
+   *     }
+   *
    * @apiParam {Number} id User's unique identifier number.
    *
    * @apiSuccess (200) {Object} user User model
