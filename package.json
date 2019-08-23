@@ -46,6 +46,8 @@
     "@types/redis": "^2.8.13",
     "async-redis": "^1.1.7",
     "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.10.0",
     "dotenv": "^8.0.0",
     "express-rate-limit": "^5.0.0",
     "helmet": "^3.20.0",
