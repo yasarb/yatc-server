@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Param } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostsService } from './posts.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -70,6 +70,56 @@ export class PostsController {
   ) {
     return this.postsService
       .createPost(userId, createPostDto)
+      .then(post => {
+        return post;
+      })
+      .catch(error => {
+        throw error;
+      });
+  }
+
+  /**
+   * @api {get} /posts/:id Retrieve a post
+   * @apiVersion 1.0.0
+   * @apiName GetPost
+   * @apiGroup Posts
+   *
+   * @apiHeader {String} Authorization User's token
+   *
+   * @apiHeaderExample {json} Header-Example:
+   *     {
+   *         "Authorization": "Bearer eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k"
+   *     }
+   *
+   * @apiParam {Number} id Post's unique identifier number.
+   *
+   * @apiSuccess (200) {Object} post Post model
+   *
+   * @apiSuccessExample {json} Success-Response: 200
+   *     HTTP/1.1 200 OK
+   *     {
+   *         "postId": "DTRNrC9ma",
+   *         "text": "To be or not to be",
+   *         "authorId": 1,
+   *         "createdAt": "2019-08-23T21:10:23.404Z"
+   *     }
+   *
+   * @apiError (404) NotFound No post found with given post id
+   *
+   * @apiErrorExample {json} Error-Response: 404
+   *     HTTP/1.1 404 Not Found
+   *     {
+   *         "statusCode": 404,
+   *         "error": "Not Found",
+   *         "message": "Post with given id was not found."
+   *     }
+   *
+   */
+  @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
+  findOne(@Param('id') postId: string) {
+    return this.postsService
+      .findOneById(postId)
       .then(post => {
         return post;
       })
