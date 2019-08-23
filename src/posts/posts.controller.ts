@@ -12,7 +12,7 @@ export class PostsController {
    * @api {post} /posts Create a post
    * @apiVersion 1.0.0
    * @apiName CreatePost
-   * @apiGroup Posts
+   * @apiGroup Post
    *
    * @apiHeader {String} Authorization User's token
    *
@@ -82,7 +82,7 @@ export class PostsController {
    * @api {get} /posts/:id Retrieve a post
    * @apiVersion 1.0.0
    * @apiName GetPost
-   * @apiGroup Posts
+   * @apiGroup Post
    *
    * @apiHeader {String} Authorization User's token
    *

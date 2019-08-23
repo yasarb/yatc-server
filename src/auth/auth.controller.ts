@@ -24,7 +24,7 @@ export class AuthController {
    * @apiParam {String} username User's unique username.
    * @apiParam {String} password User's password.
    *
-   * @apiSuccess (200) {String} userId Unique identifier for logged User
+   * @apiSuccess (200) {Number} userId Unique identifier for logged User
    * @apiSuccess (200) {String} username Unique name of logged User
    * @apiSuccess (200) {String} accessToken Token to be used to make authenticated requests
    *
@@ -36,7 +36,7 @@ export class AuthController {
    *         "accessToken": "eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k",
    *     }
    *
-   * @apiError (400) BadRequest Some of required fiels (username & password) are missing.
+   * @apiError (400) BadRequest Some of required fiels are missing.
    *
    * @apiErrorExample {text} Error-Response: 400
    *     HTTP/1.1 400 Bad Request
@@ -125,7 +125,7 @@ export class AuthController {
    * @apiName SignOut
    * @apiGroup Auth
    *
-   * @apiHeader {String} Authorization User's token
+   * @apiHeader {String} Authorization Authenticated User's access token
    *
    * @apiHeaderExample {json} Header-Example:
    *     {
