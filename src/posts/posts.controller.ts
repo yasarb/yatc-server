@@ -3,7 +3,6 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { PostsService } from './posts.service';
 import { AuthGuard } from '@nestjs/passport';
 import { User as CurrentUser } from '../users/user.decorator';
-import { User } from '../users/user.entity';
 
 @Controller('posts')
 export class PostsController {
@@ -19,7 +18,7 @@ export class PostsController {
    *
    * @apiHeaderExample {json} Header-Example:
    *     {
-   *       "Authorization": "Bearer eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k"
+   *         "Authorization": "Bearer eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k"
    *     }
    *
    * @apiSuccess (201) Create Post is created successfully.
@@ -27,17 +26,32 @@ export class PostsController {
    * @apiSuccessExample {json} Success-Response: 201
    *     HTTP/1.1 201 Created
    *     {
-   *       "postId": "TURK6PFAL",
-   *       "text": "Lorem ipsum dolar sit amet",
-   *       "authorId": 3,
-   *       "createdAt": "2019-08-10T15:17:55.163Z",
+   *         "postId": "TURK6PFAL",
+   *         "text": "Lorem ipsum dolar sit amet",
+   *         "authorId": 3,
+   *         "createdAt": "2019-08-10T15:17:55.163Z",
    *     }
    *
    * @apiError (400) BadRequest Some of required fiels are missing.
    *
-   * @apiErrorExample {text} Error-Response: 400
+   * @apiErrorExample {json} Error-Response: 400
    *     HTTP/1.1 400 Bad Request
-   *     Bad Request
+   *     {
+   *         "statusCode": 400,
+   *         "error": "Bad Request",
+   *         "message": [
+   *             {
+   *                 "target": {},
+   *                 "property": "text",
+   *                 "children": [],
+   *                 "constraints": {
+   *                     "maxLength": "text must be shorter than or equal to 150 characters",
+   *                     "isString": "text must be a string",
+   *                     "isNotEmpty": "text should not be empty"
+   *                 }
+   *             }
+   *         ]
+   *     }
    *
    * @apiError (401) Unauthorized Given credentials are incorrect.
    *

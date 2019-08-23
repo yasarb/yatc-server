@@ -31,9 +31,9 @@ export class AuthController {
    * @apiSuccessExample {json} Success-Response: 200
    *     HTTP/1.1 200 OK
    *     {
-   *       "userId": 1,
-   *       "username": "admin",
-   *       "accessToken": "eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k",
+   *         "userId": 1,
+   *         "username": "admin",
+   *         "accessToken": "eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k",
    *     }
    *
    * @apiError (400) BadRequest Some of required fiels (username & password) are missing.
@@ -73,22 +73,37 @@ export class AuthController {
    * @apiSuccessExample Success-Response: 200
    *     HTTP/1.1 200 OK
    *     {
-   *       "userId": 123,
+   *         "userId": 123,
    *     }
    *
    * @apiError (400) BadRequest Some of required fiels are missing.
    *
-   * @apiErrorExample {text} Error-Response: 400
+   * @apiErrorExample {json} Error-Response: 400
    *     HTTP/1.1 400 Bad Request
-   *     Bad Request
+   *     {
+   *         "statusCode": 400,
+   *         "error": "Bad Request",
+   *         "message": [
+   *             {
+   *                 "target": {},
+   *                 "property": "username",
+   *                 "children": [],
+   *                 "constraints": {
+   *                     "maxLength": "username must be shorter than or equal to 32 characters",
+   *                     "isAlphanumeric": "username must contain only letters and numbers",
+   *                     "isNotEmpty": "username should not be empty"
+   *                 }
+   *             }
+   *         ]
+   *     }
    *
    * @apiError (401) Unauthorized Given credentials are invalid.
    *
    * @apiErrorExample {json} Error-Response: 401
    *     HTTP/1.1 401 Unauthorized
    *     {
-   *       "statusCode": 401,
-   *       "error": "Unauthorized"
+   *         "statusCode": 401,
+   *         "error": "Unauthorized"
    *     }
    *
    */
@@ -114,7 +129,7 @@ export class AuthController {
    *
    * @apiHeaderExample {json} Header-Example:
    *     {
-   *       "Authorization": "Bearer eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k"
+   *         "Authorization": "Bearer eyJhbGciOi.eyJ1c2VybmFt.NeIgBi8V1k"
    *     }
    *
    * @apiSuccess (204) NoContent Successfully logged out.
@@ -124,8 +139,8 @@ export class AuthController {
    * @apiErrorExample {json} Error-Response: 401
    *     HTTP/1.1 401 Unauthorized
    *     {
-   *       "statusCode": 401,
-   *       "error": "Unauthorized"
+   *         "statusCode": 401,
+   *         "error": "Unauthorized"
    *     }
    */
   @UseGuards(AuthGuard('jwt'))

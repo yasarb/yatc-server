@@ -9,7 +9,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   /**
-   * @api {post} /users/:id User Profile
+   * @api {get} /users/:id User Profile
    * @apiVersion 1.0.0
    * @apiName Profile
    * @apiGroup User
