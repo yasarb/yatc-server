@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "doc:clean": "rimraf apidoc/",
     "doc:build": "apidoc . -e node_modules/ -o apidoc/",
-    "coverage": "codecov"
+    "coverage": "npm run test:cov && codecov"
   },
   "husky": {
     "hooks": {
