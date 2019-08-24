@@ -6,10 +6,12 @@ import {
   Headers,
   Body,
   HttpCode,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { isString } from 'util';
 
 @Controller('/auth')
 export class AuthController {
@@ -147,7 +149,27 @@ export class AuthController {
   @Post('/signout')
   @HttpCode(204)
   async signout(@Headers('authorization') auth) {
-    const token = auth.split(' ')[1];
+    if (!isString(auth)) {
+      throw new UnauthorizedException('Auth header must be string');
+    }
+
+    if (!auth.startsWith('Bearer')) {
+      throw new UnauthorizedException(
+        'Auth header must be start with "Bearer"',
+      );
+    }
+    const splitTokens = auth.split(' ');
+
+    if (splitTokens.length != 2) {
+      throw new UnauthorizedException();
+    }
+
+    const token = splitTokens[1];
+
+    if (token === undefined) {
+      throw new UnauthorizedException();
+    }
+
     return this.authService.signout(token);
   }
 }
