@@ -14,18 +14,18 @@ before_install:
 
 jobs:
   include:
-    - stage: 'Test'
-      name: 'Unit Test Node v10'
-      script: npm test
-      node_js: 10
-      after_success: npm run coverage -- -t $CODECOV_TOKEN
-
-    - stage: 'Test'
+    - stage: 'Lint'
       name: 'Lint'
       script: npm run lint
       node_js: 10
 
-    - stage: 'Test'
-      name: 'Build dev'
+    - stage: 'Build'
+      name: 'Build'
       script: npm run build
       node_js: 10
+
+    - stage: 'Test'
+      name: 'Unit tests with coverage'
+      script: npm run test:cov
+      node_js: 10
+      after_success: npm run coverage -- -t $CODECOV_TOKEN
