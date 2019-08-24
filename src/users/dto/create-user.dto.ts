@@ -22,7 +22,6 @@ export class CreateUserDto {
   readonly email: string;
 
   @IsNotEmpty()
-  @IsISO31661Alpha2()
   @Length(2)
   readonly lang: string;
 }
