@@ -19,7 +19,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "doc:clean": "rimraf apidoc/",
-    "doc:build": "apidoc . -e node_modules/ -o apidoc/"
+    "doc:build": "apidoc . -e node_modules/ -o apidoc/",
+    "coverage": "codecov"
   },
   "husky": {
     "hooks": {
@@ -71,6 +72,7 @@
     "@types/node": "^11.13.4",
     "@types/supertest": "2.0.7",
     "apidoc": "^0.17.7",
+    "codecov": "^3.5.0",
     "husky": "^3.0.1",
     "jest": "24.7.1",
     "prettier": "1.17.0",

@@ -10,14 +10,15 @@ cache:
 
 before_install:
   - npm i -g npm@latest
+  - npm i -g codecov
 
 jobs:
   include:
-    - state: 'Test'
+    - stage: 'Test'
       name: 'Unit Test Node v10'
       script: npm test
       node_js: 10
-      after_success: npm run coverage
+      after_success: npm run coverage -- -t $CODECOV_TOKEN
 
     - stage: 'Test'
       name: 'Lint'
