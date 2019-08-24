@@ -160,7 +160,7 @@ export class AuthController {
     }
     const splitTokens = auth.split(' ');
 
-    if (splitTokens.length != 2) {
+    if (splitTokens.length !== 2) {
       throw new UnauthorizedException();
     }
 
