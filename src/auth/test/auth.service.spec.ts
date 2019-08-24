@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
-import { UsersModule } from '../users/users.module';
+import { AuthService } from '../auth.service';
+import { UsersModule } from '../../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
-import { RedisModule } from '../redis/redis.module';
+import { jwtConstants } from '../constants';
+import { RedisModule } from '../../redis/redis.module';
 
 describe('AuthService', () => {
   let service: AuthService;
