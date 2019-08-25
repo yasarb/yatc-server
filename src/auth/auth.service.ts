@@ -10,6 +10,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UserDto } from '../users/dto/user.dto';
 import { User } from '../users/user.entity';
 import * as bcrypt from 'bcryptjs';
+import { validate } from 'class-validator';
 
 @Injectable()
 export class AuthService {
@@ -17,11 +18,11 @@ export class AuthService {
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
     private readonly redis: RedisService,
-  ) {}
+  ) { }
 
   async validateUser(username: string, password: string): Promise<UserDto> {
     return this.usersService
-      .findUserByUsername(username)
+      .findByUsername(username)
       .then(user => {
         const userDto = UserDto.fromEntity(user);
 
@@ -40,7 +41,7 @@ export class AuthService {
         }
       })
       .catch(error => {
-        throw error;
+        throw new UnauthorizedException('Incorrect username or password.');
       });
   }
 
@@ -54,19 +55,27 @@ export class AuthService {
   }
 
   async signup(createUserDto: CreateUserDto): Promise<User | undefined> {
-    const saltRounds = process.env.NODE_ENV === 'development' ? 1 : 10;
+    const saltRounds = this.getSaltRound();
 
-    return bcrypt
-      .hash(createUserDto.password, saltRounds)
+    return validate(createUserDto)
+      .then(errors => {
+        if (errors.length > 0) {
+          return undefined;
+        } else {
+          return bcrypt.hash(createUserDto.password, saltRounds);
+        }
+      })
       .then(hash => {
-        const user = new User();
-        user.username = createUserDto.username;
-        user.email = createUserDto.email;
-        user.password = hash;
-        user.lang = createUserDto.lang;
-        user.registeredAt = new Date();
+        if (hash) {
+          const user = new User();
+          user.username = createUserDto.username;
+          user.email = createUserDto.email;
+          user.password = hash;
+          user.lang = createUserDto.lang;
+          user.registeredAt = new Date();
 
-        return user.save();
+          return this.usersService.save(user);
+        }
       })
       .catch(error => {
         throw new BadRequestException();
@@ -82,5 +91,9 @@ export class AuthService {
     await this.redis
       .getClient()
       .zadd('jwt:revoked:tokens', payload[expField], payloadStr);
+  }
+
+  getSaltRound() {
+    return process.env.NODE_ENV === 'development' ? 1 : 10;
   }
 }
