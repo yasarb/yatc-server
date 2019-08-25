@@ -12,16 +12,17 @@ import { PostsModule } from './posts/posts.module';
 @Module({
   imports: [
     AuthModule,
-    UsersModule,
     RedisModule,
     ConfigModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useExisting: PostgresConfigService,
+      name: 'default',
+      useClass: PostgresConfigService,
     }),
+    UsersModule,
     PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
