@@ -1,0 +1,31 @@
+language: node_js
+sudo: required
+
+install:
+  - npm install
+
+cache:
+  directories:
+    - 'node_modules'
+
+before_install:
+  - npm i -g npm@latest
+  - npm i -g codecov
+
+jobs:
+  include:
+    - stage: 'Lint'
+      name: 'Lint'
+      script: npm run lint
+      node_js: 10
+
+    - stage: 'Build'
+      name: 'Build'
+      script: npm run build
+      node_js: 10
+
+    - stage: 'Test'
+      name: 'Unit tests with coverage'
+      script: npm run test:cov
+      node_js: 10
+      after_success: npm run coverage -- -t $CODECOV_TOKEN
